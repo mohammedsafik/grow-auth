@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Login Test</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <h2>Google Login Test</h2>
+
+  <div id="g_id_onload"
+       data-client_id="306147110657-fn6jckl6rvsmf6haq4q4kutgpckm7ccg.apps.googleusercontent.com"
+       data-callback="handleCredentialResponse">
+  </div>
+
+  <div class="g_id_signin"
+       data-type="standard"
+       data-size="large"
+       data-theme="outline"
+       data-text="signin_with"
+       data-shape="rectangular"
+       data-logo_alignment="left">
+  </div>
+
+  <h3>Google ID Token:</h3>
+  <textarea id="tokenBox" rows="10" cols="100"></textarea>
+
+  <script>
+    function handleCredentialResponse(response) {
+      console.log("Google ID Token:", response.credential);
+      document.getElementById("tokenBox").value = response.credential;
+    }
+  </script>
+</body>
+</html>
