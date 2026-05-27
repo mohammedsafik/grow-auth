@@ -563,23 +563,23 @@
 //   refreshAccessToken,
 // };
 
-const User = require("../models/user");
-const ApiError = require("../utlis/ApiError");
-const { verifyGoogleToken } = require("../services/google.service");
-const { createAndSendOtp, verifyOtp } = require("../services/otp.service");
-const { hashValue } = require("../utlis/hash");
+const User = require("../../models/user");
+const ApiError = require("../../utlis/ApiError");
+const { verifyGoogleToken } = require("../../services/google.service");
+const { createAndSendOtp, verifyOtp } = require("../../services/otp.service");
+const { hashValue } = require("../../utlis/hash");
 const {
   USER_STATUS,
   AUTH_PROVIDER,
   OTP_PURPOSE,
 } = require("./auth.constants");
-const { compareHash } = require("../utlis/hash");
+const { compareHash } = require("../../utlis/hash");
 const {
   generateAccessToken,
   generateRefreshToken,
   verifyAccessToken,
   verifyRefreshToken,
-} = require("../services/jwt.service");
+} = require("../../services/jwt.service");
 
 const buildActiveSessionResponse = (user, message, extra = {}) => {
   return {

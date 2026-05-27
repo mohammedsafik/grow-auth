@@ -3,8 +3,10 @@ const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const errorMiddleware = require("./middlewares/error.middleware");
-const authRoutes = require("./modules/auth.routes");
+const authRoutes = require("./modules/auth/auth.routes");
 const cookieParser = require("cookie-parser");
+const kycRoutes = require("./modules/kyc.routes");
+
 
 
 
@@ -54,6 +56,7 @@ app.get("/", (req, res) => {
 // routes will come hereconst authRoutes = require("./modules/auth/auth.routes");
 
 app.use("/api/auth", authRoutes);
+app.use("/api/kyc", kycRoutes);
 
 app.use(errorMiddleware);
 

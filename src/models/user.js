@@ -11,10 +11,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+
     profileImage: {
-  type: String,
-  default: null,
-},
+      type: String,
+      default: null,
+    },
 
     email: {
       type: String,
@@ -62,6 +63,24 @@ const userSchema = new mongoose.Schema(
         "BLOCKED",
       ],
       default: "PHONE_REQUIRED",
+    },
+
+    kycStatus: {
+      type: String,
+      enum: [
+        "NOT_SUBMITTED",
+        "IN_PROGRESS",
+        "PENDING",
+        "APPROVED",
+        "REJECTED",
+      ],
+      default: "NOT_SUBMITTED",
+    },
+
+    kycId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "KYC",
+      default: null,
     },
 
     isActive: {
