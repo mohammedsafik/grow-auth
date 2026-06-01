@@ -1,5 +1,5 @@
-const KYC = require("../models/kyc.model");
-const User = require("../models/user.model");
+const KYC = require("../../models/kyc");
+const User = require("../../models/user");
 
 const makeImageObject = (file) => {
   if (!file) return null;

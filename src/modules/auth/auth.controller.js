@@ -199,8 +199,8 @@
 //   refreshAccessToken
 // };
 
-const asyncHandler = require("../middlewares/asynchandler");
-const ApiResponse = require("../utlis/ApiResponse");
+const asyncHandler = require("../../middlewares/asynchandler");
+const ApiResponse = require("../../utlis/ApiResponse");
 const authService = require("./auth.service");
 
 const parseDurationToMs = (value, fallback) => {

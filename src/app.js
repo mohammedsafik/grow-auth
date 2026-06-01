@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const errorMiddleware = require("./middlewares/error.middleware");
 const authRoutes = require("./modules/auth/auth.routes");
 const cookieParser = require("cookie-parser");
-const kycRoutes = require("./modules/kyc.routes");
+const kycRoutes = require("./modules/kyc/kyc.routes");
 
 
 

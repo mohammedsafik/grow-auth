@@ -2,7 +2,7 @@ const express = require("express");
 const multer = require("multer");
 
 const kycController = require("./kyc.controller");
-const authMiddleware = require("../middlewares/auth.middleware");
+const authMiddleware = require("../../middlewares/auth.middleware");
 
 const router = express.Router();
 
@@ -17,14 +17,12 @@ const upload = multer({
 
 router.post(
   "/pan",
-  authMiddleware,
   upload.single("panCardImage"),
   kycController.savePan
 );
 
 router.post(
   "/aadhaar",
-  authMiddleware,
   upload.fields([
     { name: "aadhaarFrontImage", maxCount: 1 },
     { name: "aadhaarBackImage", maxCount: 1 },
@@ -34,27 +32,24 @@ router.post(
 
 router.post(
   "/bank",
-  authMiddleware,
   upload.single("cancelledChequeImage"),
   kycController.saveBank
 );
 
 router.post(
   "/selfie",
-  authMiddleware,
-  upload.single("selfieImage"),
+    upload.single("selfieImage"),
   kycController.saveSelfie
 );
 
 router.post(
   "/signature",
-  authMiddleware,
   upload.single("signatureImage"),
   kycController.saveSignature
 );
 
-router.post("/submit", authMiddleware, kycController.submitForReview);
+router.post("/submit", kycController.submitForReview);
 
-router.get("/me", authMiddleware, kycController.getMyKycStatus);
+router.get("/me", kycController.getMyKycStatus);
 
 module.exports = router;
