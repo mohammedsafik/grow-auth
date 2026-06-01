@@ -3,70 +3,95 @@ const ApiResponse = require("../../utlis/ApiResponse");
 const kycService = require("./kyc.service");
 
 
+
 const savePan = asyncHandler(async (req, res) => {
-  const userId = req.userId;
+const userId =
+  req.body.userId ||
+  req.headers.userid ||
+  req.headers["x-user-id"];
+  const kyc = await kycService.savePan(userId, req.body, req.file);
 
-  const kyc = await kycService.savePan(userId, req.body, req.file);
-
-  return res
-    .status(200)
-    .json(new ApiResponse(200, kyc, "PAN details saved successfully"));
+  return res
+    .status(200)
+    .json(new ApiResponse(200, kyc, "PAN details saved successfully"));
 });
 
 const saveAadhaar = asyncHandler(async (req, res) => {
-  const userId = req.userId;
-  const kyc = await kycService.saveAadhaar(userId, req.body, req.files);
-  return res
-    .status(200)
-    .json(new ApiResponse(200, kyc, "Aadhaar details saved successfully"));
+  const userId = req.body.userId ||
+  req.headers.userid ||
+  req.headers["x-user-id"];
+  const kyc = await kycService.saveAadhaar(userId, req.body, req.files);
+  return res
+    .status(200)
+    .json(new ApiResponse(200, kyc, "Aadhaar details saved successfully"));
 });
 
 const saveBank = asyncHandler(async (req, res) => {
-  const userId = req.userId;
-  const kyc = await kycService.saveBank(userId, req.body, req.file);
-  return res
-    .status(200)
-    .json(new ApiResponse(200, kyc, "Bank details saved successfully"));
+  const userId = req.body.userId ||
+  req.headers.userid ||
+  req.headers["x-user-id"];
+  const kyc = await kycService.saveBank(userId, req.body, req.file);
+  return res
+    .status(200)
+    .json(new ApiResponse(200, kyc, "Bank details saved successfully"));
 });
 
 const saveSelfie = asyncHandler(async (req, res) => {
-  const userId = req.userId;
-  const kyc = await kycService.saveSelfie(userId, req.file);
-  return res
-    .status(200)
-    .json(new ApiResponse(200, kyc, "Selfie saved successfully"));
+  const userId = req.body.userId ||
+  req.headers.userid ||
+  req.headers["x-user-id"];
+  const kyc = await kycService.saveSelfie(userId, req.file);
+  return res
+    .status(200)
+    .json(new ApiResponse(200, kyc, "Selfie saved successfully"));
 });
 
 const saveSignature = asyncHandler(async (req, res) => {
-  const userId = req.userId;
-  const kyc = await kycService.saveSignature(userId, req.file);
-  return res
-    .status(200)
-    .json(new ApiResponse(200, kyc, "Signature saved successfully"));
+  const userId = req.body.userId ||
+  req.headers.userid ||
+  req.headers["x-user-id"];
+  const kyc = await kycService.saveSignature(userId, req.file);
+  return res
+    .status(200)
+    .json(new ApiResponse(200, kyc, "Signature saved successfully"));
 });
 
 const submitForReview = asyncHandler(async (req, res) => {
-  const userId = req.userId;
-  const kyc = await kycService.submitForReview(userId);
-  return res
-    .status(200)
-    .json(new ApiResponse(200, kyc, "KYC submitted for review"));
+  const userId = req.body.userId ||
+  req.headers.userid ||
+  req.headers["x-user-id"];
+  const kyc = await kycService.submitForReview(userId);
+  return res
+    .status(200)
+    .json(new ApiResponse(200, kyc, "KYC submitted for review"));
 });
 
 const getMyKycStatus = asyncHandler(async (req, res) => {
-  const userId = req.userId;
-  const kyc = await kyService.getMyKycStatus(userId);
-  return res
-    .status(200)
-    .json(new ApiResponse(200, kyc, "KYC status fetched successfully"));
+  const userId =
+    req.query.userId ||
+    req.headers.userid ||
+    req.headers["x-user-id"];
+
+  if (!userId) {
+    return res.status(400).json({
+      success: false,
+      message: "userId is required",
+    });
+  }
+
+  const kyc = await kycService.getMyKycStatus(userId);
+
+  return res
+  .status(200)
+    .json(new ApiResponse(200, kyc, "KYC status fetched successfully"));
 });
 
 module.exports = {
-  savePan,
-  saveAadhaar,
-  saveBank,
-  saveSelfie,
-  saveSignature,
-  submitForReview,
-  getMyKycStatus,
+  savePan,
+  saveAadhaar,
+  saveBank,
+  saveSelfie,
+  saveSignature,
+  submitForReview,
+  getMyKycStatus,
 };
